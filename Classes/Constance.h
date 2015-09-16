@@ -1,0 +1,1 @@
+const int GAME_BG = 0x001;
