@@ -21,6 +21,10 @@ public:
 	virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);
 	virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
 	virtual void ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent);
+
+private:
+	ui::UIButton* mStartButton;
+	UIButton* mContinueButton;
 };
 #endif
 

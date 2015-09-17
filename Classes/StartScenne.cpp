@@ -19,11 +19,23 @@ void StartScenne::onExit()
 {
 	CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 	//onExit或析构中需调用（否则内存泄露）
+	SceneReader::sharedSceneReader()->purge();
 	GUIReader::shareReader()->purge();
+	ActionManager::purge();
 }
 
 bool StartScenne::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
 {
+	CCPoint touchLocation = pTouch->getLocation();
+	CCPoint localPosition = this->convertToNodeSpaceAR(touchLocation);
+
+	if(mStartButton){
+	}
+
+	if(mContinueButton){
+
+	}
+
 	return false;
 }
 
@@ -52,6 +64,9 @@ bool StartScenne::init()
 	//加载
 	UILayout* widget = dynamic_cast<UILayout*>(GUIReader::shareReader()->widgetFromJsonFile("start/startscene.ExportJson"));	
 	addChild(widget);
+
+	mStartButton = dynamic_cast<UIButton*>(widget->getChildByName("start_button"));
+	mContinueButton = dynamic_cast<UIButton*>(widget->getChildByName("continue_button"));
 
 	return true;
 }
