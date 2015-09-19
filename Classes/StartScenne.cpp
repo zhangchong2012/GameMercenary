@@ -1,5 +1,5 @@
 #include "StartScenne.h"
-
+#include "BlankLayer.h"
 StartScenne::StartScenne(void)
 {
 	
@@ -13,6 +13,8 @@ StartScenne::~StartScenne(void)
 void StartScenne::onEnter()
 {
 	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, false);
+	
+
 }
 
 void StartScenne::onExit()
@@ -24,6 +26,7 @@ void StartScenne::onExit()
 	ActionManager::purge();
 }
 
+/*
 bool StartScenne::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
 {
 	CCPoint touchLocation = pTouch->getLocation();
@@ -38,21 +41,7 @@ bool StartScenne::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
 
 	return false;
 }
-
-void StartScenne::ccTouchMoved( CCTouch *pTouch, CCEvent *pEvent )
-{
-
-}
-
-void StartScenne::ccTouchEnded( CCTouch *pTouch, CCEvent *pEvent )
-{
-
-}
-
-void StartScenne::ccTouchCancelled( CCTouch *pTouch, CCEvent *pEvent )
-{
-
-}
+*/
 
 bool StartScenne::init()
 {
@@ -64,10 +53,16 @@ bool StartScenne::init()
 	//╪сть
 	UILayout* widget = dynamic_cast<UILayout*>(GUIReader::shareReader()->widgetFromJsonFile("start/startscene.ExportJson"));	
 	addChild(widget);
+	auto button = widget->getChildByName("start_button");
 
 	mStartButton = dynamic_cast<UIButton*>(widget->getChildByName("start_button"));
-	mContinueButton = dynamic_cast<UIButton*>(widget->getChildByName("continue_button"));
+	mContinueButton = dynamic_cast<UIButton*>(widget->getChildByName("Button_5"));
 
+	if(mStartButton)
+	{
+		mStartButton->addTouchEventListener(this, toucheventselector(StartScenne::onClickStartButton));
+
+	}
 	return true;
 }
 
@@ -80,4 +75,45 @@ CCScene* StartScenne::scene()
 	scene->addChild(layer);
 	 
 	return scene;
+}
+
+void StartScenne::onClickStartButton( CCObject* object,TouchEventType type )
+{
+	if(object){
+		switch (type)
+		{
+		case TouchEventType::TOUCH_EVENT_BEGAN:
+			break;
+		case TouchEventType::TOUCH_EVENT_ENDED:
+			{
+				CCScene* scene = CCScene::create();
+				BlankLayer* layer = new BlankLayer();
+				scene->addChild(layer);
+				layer->autorelease();
+
+				CCDirector::sharedDirector()->replaceScene(scene);
+
+			}
+
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void StartScenne::onClickContinueButton( CCObject* object,TouchEventType type )
+{
+	if(object){
+		switch (type)
+		{
+		case TouchEventType::TOUCH_EVENT_BEGAN:
+			break;
+		case TouchEventType::TOUCH_EVENT_ENDED:
+
+			break;
+		default:
+			break;
+		}
+		}
 }

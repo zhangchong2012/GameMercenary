@@ -17,10 +17,8 @@ public:
 	virtual bool init();
 	CREATE_FUNC(StartScenne);
 
-	virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
-	virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);
-	virtual void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
-	virtual void ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent);
+	void onClickStartButton(CCObject* object,TouchEventType type);  
+	void onClickContinueButton(CCObject* object,TouchEventType type);  
 
 private:
 	ui::UIButton* mStartButton;
